@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRUPO RUBER - Comercializadora Mexicana</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+  line-height: 1.6; 
+  color: #333;
+  background: #f9fafb;
+}
+
+.header {
+  background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8a 100%);
+  color: white;
+  padding: 2rem 1rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.header p {
+  font-size: 1.1rem;
+  opacity: 0.95;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.value-prop {
+  background: white;
+  border-left: 4px solid #1e3a5f;
+  padding: 1.5rem;
+  margin: 2rem 0 3rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  text-align: center;
+}
+
+.value-prop p {
+  font-size: 1.1rem;
+  color: #1e3a5f;
+  font-weight: 500;
+}
+
+.value-prop small {
+  display: block;
+  font-size: 0.95rem;
+  margin-top: 0.75rem;
+  opacity: 0.8;
+  font-weight: normal;
+}
+
+h2 {
+  text-align: center;
+  color: #1e3a5f;
+  margin: 3rem 0 2rem;
+  font-size: 2rem;
+}
+
+.categories-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.category-main {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.category-header {
+  background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8a 100%);
+  color: white;
+  padding: 1.25rem 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.category-header:hover {
+  background: linear-gradient(135deg, #2d5a8a 0%, #3d7aaa 100%);
+}
+
+.category-header-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.category-icon {
+  font-size: 28px;
+}
+
+.category-header h3 {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.toggle-arrow {
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.category-header.active .toggle-arrow {
+  transform: rotate(180deg);
+}
+
+.category-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.category-header.active ~ .category-content {
+  max-height: 1000px;
+}
+
+.catalog-list {
+  padding: 1.5rem;
+  background: white;
+}
+
+.catalog-item {
+  padding: 1rem;
+  background: #f9fafb;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border-left: 3px solid #1e3a5f;
+  transition: all 0.3s ease;
+}
+
+.catalog-item:last-child {
+  margin-bottom: 0;
+}
+
+.catalog-item:hover {
+  background: #f0f4f8;
+  box-shadow: 0 2px 6px rgba(30, 58, 95, 0.12);
+}
+
+.catalog-name {
+  font-weight: 600;
+  color: #1e3a5f;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.catalog-size {
+  font-size: 0.85rem;
+  color: #999;
+  margin-bottom: 0.75rem;
+}
+
+.download-link {
+  display: inline-block;
+  background: #1e3a5f;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.download-link:hover {
+  background: #2d5a8a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(30, 58, 95, 0.2);
+}
+
+.contact-section {
+  background: #f0f4f8;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  margin: 3rem 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.contact-section h2 {
+  margin-top: 0;
+  color: #1e3a5f;
+}
+
+.contact-section > p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.contact-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+.contact-item-icon {
+  font-size: 32px;
+  margin-bottom: 0.75rem;
+}
+
+.contact-item-label {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.contact-item-value {
+  color: #1e3a5f;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.whatsapp-btn {
+  background: #25d366;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  display: inline-block;
+  margin-top: 1.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.whatsapp-btn:hover {
+  background: #20ba58;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
+.footer {
+  background: #1e3a5f;
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 3rem;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .header h1 { font-size: 1.8rem; }
+  .categories-container { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>GRUPO RUBER</h1>
+  <p>Comercializadora Mexicana</p>
+</div>
+
+<div class="container">
+  <div class="value-prop">
+    <p>✓ Un mismo proveedor para absolutamente todo</p>
+    <small>Contamos con cartera de los principales fabricantes y proveedores. Escuelas, oficinas, cocinas profesionales, inmobiliario y mucho más.</small>
+  </div>
+
+  <h2>Catálogos de Productos</h2>
+
+  <div class="categories-container">
+    <div class="category-main">
+      <div class="category-header active" onclick="this.classList.toggle('active')">
+        <div class="category-header-title">
+          <span class="category-icon">🛢️</span>
+          <h3>Plásticos</h3>
+        </div>
+        <span class="toggle-arrow">▼</span>
+      </div>
+      <div class="category-content">
+        <div class="catalog-list">
+          <div class="catalog-item">
+            <div class="catalog-name">CATÁLOGO PLÁSTICOS GRUPO RUBER 2026</div>
+            <div class="catalog-size">1,248 KB • PDF</div>
+            <button class="download-link" onclick="downloadCatalog('CATÁLOGO PLÁSTICOS GRUPO RUBER 2026')">📥 Descargar</button>
+          </div>
+          <div class="catalog-item">
+            <div class="catalog-name">CATÁLOGO LAMEX VARIOS</div>
+            <div class="catalog-size">5,158 KB • PDF</div>
+            <button class="download-link" onclick="downloadCatalog('CATÁLOGO LAMEX VARIOS')">📥 Descargar</button>
+          </div>
+          <div class="catalog-item">
+            <div class="catalog-name">Lista precios RUBER PLÁSTICOS COLECCIÓN 3</div>
+            <div class="catalog-size">264 KB • PDF</div>
+            <button class="download-link" onclick="downloadCatalog('Lista precios RUBER PLÁSTICOS COLECCIÓN 3')">📥 Descargar</button>
+          </div>
+          <div class="catalog-item">
+            <div class="catalog-name">Lista precios RUBER PLÁSTICOS COLECCIÓN 2</div>
+            <div class="catalog-size">88 KB • PDF</div>
+            <button class="download-link" onclick="downloadCatalog('Lista precios RUBER PLÁSTICOS COLECCIÓN 2')">📥 Descargar</button>
+          </div>
+          <div class="catalog-item">
+            <div class="catalog-name">Lista precios RUBER PLÁSTICOS COLECCIÓN 1</div>
+            <div class="catalog-size">673 KB • PDF</div>
+            <button class="download-link" onclick="downloadCatalog('Lista precios RUBER PLÁSTICOS COLECCIÓN 1')">📥 Descargar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category-main">
+      <div class="category-header" onclick="this.classList.toggle('active')">
+        <div class="category-header-title">
+          <span class="category-icon">⚙️</span>
+          <h3>Galvanizados</h3>
+        </div>
+        <span class="toggle-arrow">▼</span>
+      </div>
+      <div class="category-content">
+        <div class="catalog-list">
+          <div class="catalog-item">
+            <div class="catalog-name">CATÁLOGO GALVANIZADO IDEAL</div>
+            <div class="catalog-size">878 KB • PDF</div>
+            <button class="download-link" onclick="downloadCatalog('CATÁLOGO GALVANIZADO IDEAL')">📥 Descargar</button>
+          </div>
+          <div class="catalog-item">
+            <div class="catalog-name">Catálogo Vittori 2026 VF - 160126</div>
+            <div class="catalog-size">78,947 KB • PDF</div>
+            <button class="download-link" onclick="downloadCatalog('Catálogo Vittori 2026 VF - 160126')">📥 Descargar</button>
+          </div>
+          <div class="catalog-item">
+            <div class="catalog-name">Lista Precios RUBER VITTORI ago26</div>
+            <div class="catalog-size">4,447 KB • PDF</div>
+            <button class="download-link" onclick="downloadCatalog('Lista Precios RUBER VITTORI ago26')">📥 Descargar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category-main">
+      <div class="category-header" onclick="this.classList.toggle('active')">
+        <div class="category-header-title">
+          <span class="category-icon">🏫</span>
+          <h3>Escuelas & Oficinas</h3>
+        </div>
+        <span class="toggle-arrow">▼</span>
+      </div>
+      <div class="category-content">
+        <div class="catalog-list">
+          <div class="catalog-item">
+            <div class="catalog-name">CATÁLOGO ALUMINIO LAMEX</div>
+            <div class="catalog-size">2,377 KB • PDF</div>
+            <button class="download-link" onclick="downloadCatalog('CATÁLOGO ALUMINIO LAMEX')">📥 Descargar</button>
+          </div>
+          <div class="catalog-item">
+            <div class="catalog-name">Catálogo Vittori 2026 VF (Mobiliario)</div>
+            <div class="catalog-size">78,947 KB • PDF</div>
+            <button class="download-link" onclick="downloadCatalog('Catálogo - Vittori 2026 VF - 160126')">📥 Descargar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category-main">
+      <div class="category-header" onclick="this.classList.toggle('active')">
+        <div class="category-header-title">
+          <span class="category-icon">🥐</span>
+          <h3>Panadería</h3>
+        </div>
+        <span class="toggle-arrow">▼</span>
+      </div>
+      <div class="category-content">
+        <div class="catalog-list">
+          <div class="catalog-item">
+            <div class="catalog-name">CATÁLOGO PANADERA IDEAL</div>
+            <div class="catalog-size">2,753 KB • PDF</div>
+            <button class="download-link" onclick="downloadCatalog('CATÁLOGO PANADERA IDEAL')">📥 Descargar</button>
+          </div>
+          <div class="catalog-item">
+            <div class="catalog-name">CATÁLOGO SANTA ANITA 2026</div>
+            <div class="catalog-size">6,270 KB • PDF</div>
+            <button class="download-link" onclick="downloadCatalog('CATÁLOGO SANTA ANITA 2026')">📥 Descargar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category-main">
+      <div class="category-header" onclick="this.classList.toggle('active')">
+        <div class="category-header-title">
+          <span class="category-icon">🍽️</span>
+          <h3>CINSA</h3>
+        </div>
+        <span class="toggle-arrow">▼</span>
+      </div>
+      <div class="category-content">
+        <div class="catalog-list">
+          <div class="catalog-item">
+            <div class="catalog-name">CATÁLOGO CINSA 2026</div>
+            <div class="catalog-size">14,358 KB • PDF</div>
+            <button class="download-link" onclick="downloadCatalog('CATÁLOGO CINSA 2026')">📥 Descargar</button>
+          </div>
+          <div class="catalog-item">
+            <div class="catalog-name">Lista Precios RUBER Cassera Cinsa SA ago26</div>
+            <div class="catalog-size">6,183 KB • PDF</div>
+            <button class="download-link" onclick="downloadCatalog('Lista Precios RUBER Cassera Cinsa SA ago26')">📥 Descargar</button>
+          </div>
+          <div class="catalog-item">
+            <div class="catalog-name">Lista precio RUBER CINSA 2</div>
+            <div class="catalog-size">119 KB • PDF</div>
+            <button class="download-link" onclick="downloadCatalog('Lista precio RUBER CINSA 2')">📥 Descargar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category-main">
+      <div class="category-header" onclick="this.classList.toggle('active')">
+        <div class="category-header-title">
+          <span class="category-icon">⚡</span>
+          <h3>Electrónica del Hogar</h3>
+        </div>
+        <span class="toggle-arrow">▼</span>
+      </div>
+      <div class="category-content">
+        <div class="catalog-list">
+          <div class="catalog-item">
+            <div class="catalog-name">Lista precios RUBER OSTER ago26</div>
+            <div class="catalog-size">395 KB • PDF</div>
+            <button class="download-link" onclick="downloadCatalog('Lista precios RUBER OSTER ago26')">📥 Descargar</button>
+          </div>
+          <div class="catalog-item">
+            <div class="catalog-name">Catálogo GLASSIA</div>
+            <div class="catalog-size">7,343 KB • PDF</div>
+            <button class="download-link" onclick="downloadCatalog('Catálogo_2026_GLASSIA')">📥 Descargar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-section">
+    <h2>¿Necesitas más información?</h2>
+    <p>Contacta directamente con nuestro equipo para cotizaciones, consultas o pedidos especiales.</p>
+    
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-item-icon">📱</div>
+        <div class="contact-item-label">WhatsApp</div>
+        <div class="contact-item-value">993-117-0745</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">📧</div>
+        <div class="contact-item-label">Email</div>
+        <div class="contact-item-value">psiczurita@gmail.com</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">☎️</div>
+        <div class="contact-item-label">Teléfono</div>
+        <div class="contact-item-value">993-117-0745</div>
+      </div>
+    </div>
+
+    <a href="https://wa.me/5299311707450?text=Hola%20GRUPO%20RUBER%2C%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20productos" target="_blank" class="whatsapp-btn">
+      💬 Contactar por WhatsApp
+    </a>
+  </div>
+</div>
+
+<div class="footer">
+  <p>&copy; 2026 GRUPO RUBER - Comercializadora Mexicana | Todos los derechos reservados</p>
+  <p style="font-size: 0.85rem; margin-top: 0.5rem;">Tabasco, México</p>
+</div>
+
+<script>
+function downloadCatalog(catalogName) {
+  alert(`Descarga de: ${catalogName}\n\nEn breve se vinculará el PDF real desde tus servidores.`);
+  console.log(`Descargando: ${catalogName}`);
+}
+</script>
+
+</body>
+</html>
